@@ -1,9 +1,11 @@
+
+
 // Online Java Compiler
 // Use this editor to write, compile and run your Java code online
 
 class HelloWorld {
     public static void main(String[] args) {
-        Employee emp = new Employee("Umut",2000.0,45.0,1990);
+        Employee emp = new Employee("Umut",2000.0,45.0,1985);
         
         System.out.println(emp.toString());
     }
@@ -49,7 +51,11 @@ class Employee{
     }
     
     public String toString() { 
-        return "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
+        String msg = "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax());
+        this.salary = this.salary+this.raiseSalary();
+        msg += "'\nNext Year Total Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
+        
+        return msg;
     } 
     
 }
