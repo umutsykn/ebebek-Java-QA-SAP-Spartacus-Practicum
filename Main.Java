@@ -1,61 +1,45 @@
+import java.util.Scanner;
 
-
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
-
-class HelloWorld {
+public class Main {
     public static void main(String[] args) {
-        Employee emp = new Employee("Umut",2000.0,45.0,1985);
+        / /Değişkenlerimizi tanımlıyoruz.
+        double km, age, tekYon, gidisDonus, kmBasinaUcret = 0.10, howFly,totalPrice, priceWithoutDiscount,ageDiscount=0,roundTripDiscount=0;
+        Scanner input = new Scanner(System.in);
         
-        System.out.println(emp.toString());
-    }
-}
+        // kullanıcıdan gerekli bilgileri alıyoruz
+        System.out.print("How many km you fly? \nAnswer : ");
+        km = input.nextDouble();
+        System.out.print("How old are you ?\nAnswer :");
+        age = input.nextDouble();
+        System.out.println("Choose how you fly.");
+        System.out.print("One way ticket:1 \nRound trip : 2\nAnswer : ");
+        howFly = input.nextDouble();
+        priceWithoutDiscount = km * kmBasinaUcret;
+        boolean isPrime = true;
+        
+       //kontrol mekanizmamızı kuruyoruz 
+        if (howFly < 3 && howFly > 0&& age>0) {
+          if(age<12){
+           ageDiscount=(priceWithoutDiscount/2);
+              System.out.println("\nAge discount : "+ageDiscount);
+          }else if (age>=12&&age<=24)
+          { ageDiscount=((priceWithoutDiscount*10)/100)        ;
+              System.out.println("\nAge discount : "+ ageDiscount);
+          } else if (age>65) {ageDiscount= (priceWithoutDiscount*30)/100;
+              System.out.println("\nAge discount : "+ ageDiscount);
+          }if (howFly==2){roundTripDiscount=(priceWithoutDiscount*20)/100;
+                System.out.println("Round trip discount : "+ roundTripDiscount);
+            }
+            System.out.println("Price without dicount : " + priceWithoutDiscount);
 
-class Employee{
-    String name;
-    Double salary;
-    Double workHours;
-    int hireYear;
+          totalPrice=(priceWithoutDiscount-ageDiscount-roundTripDiscount);
+            System.out.println("Total price : "+ totalPrice);
+        } else {
+        
+                System.out.println("You entered faulty input. ");
 
-    public Employee(String _name, Double _salary, Double _workHours, int _hireYear){
-        this.name=_name;
-        this.salary=_salary;
-        this.workHours=_workHours;
-        this.hireYear=_hireYear;
+        }
+
+
     }
-    
-    public Double tax(){
-        if(this.salary > 1000)
-            return this.salary*3/100;
-        return 0.0;
-    }
-    
-    public Double bonus(){
-        Double bonusWorksHours = this.workHours - 40.0;
-        if(bonusWorksHours > 0)
-            return bonusWorksHours*30;
-        return 0.0;
-    }
-    
-    public Double raiseSalary(){
-        int workYears = 2021 - this.hireYear;
-        Double realSalary = this.salary - this.tax() + this.bonus();
-        
-        if(workYears < 10 )
-            return realSalary*0.05;
-        else if (workYears > 9 && workYears < 20)
-            return realSalary*0.10;
-        else
-            return realSalary*0.15;
-            
-    }
-    
-    public String toString() { 
-        String msg = "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax());
-        this.salary = this.salary+this.raiseSalary();
-        msg += "'\nNext Year Total Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
-        
-        return msg;
-    } 
-    
 }
