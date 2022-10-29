@@ -1,13 +1,33 @@
 import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args ){
-        double anapara , kdvmiktar , kdv;
-        Scanner sc= new Scanner(System.in);        
-        System.out.println("Ana Para Miktarı Giriniz: ");
-        anapara=sc.nextDouble();
-        kdv=(1000>anapara)?18:8;
-        kdvmiktar=anapara*kdv/100;
-        System.out.println("KDV miktarı:"+kdvmiktar);    
-        System.out.println("KDV'li tutar:"+kdvmiktar+anapara);
-    }
+
+	public static void main(String[] args) {
+		String userName, password, reset, newPassword;
+
+		Scanner inp = new Scanner(System.in);
+		System.out.print("Kullanıcı adını giriniz :");
+		userName = inp.nextLine();
+
+		System.out.print("Şifrenizi giriniz : ");
+		password = inp.nextLine();
+
+		if (userName.equals("patika") && password.equals("java123")) {
+			System.out.print("Giriş yaptınız");
+		} else {
+			System.out.print("Bilgileriniz yanlış, şifre yenilemek istermisiniz:  " + " \n( yes / no )");
+			reset = inp.nextLine();
+			if (reset.equals("no")) {
+				System.out.print("Giriş başarısız");
+			} else if (reset.equals("yes")) {
+				System.out.print("Yeni şifrenizi giriniz :");
+				newPassword = inp.nextLine();
+				if (newPassword.equals("java123")) {
+					System.out.print("Şifreniz eski şifre ile aynıdır,lütfen başka bir parola seçiniz");
+				} else {
+					System.out.println("Şifreniz oluşturuldu");
+				}
+			}
+		}
+	}
 }
