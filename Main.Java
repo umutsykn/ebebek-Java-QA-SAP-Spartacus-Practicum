@@ -1,61 +1,148 @@
+import java.security.KeyStore;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class MineSwepper {
+    int rowNumber;
+    int colNumber;
+    String[][] mayinMap;
+    String[][] gameMap;
+    int mayinSayisi;
+    int a;
+    int b;
+    int count;
+    boolean isTrue = true;
 
 
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
+    public MineSwepper(int row, int col) {
+        this.rowNumber = row;
+        this.colNumber = col;
+        this.gameMap = new String[row][col];
+        this.mayinMap = new String[row][col];
+        this.mayinSayisi = (row * col) / 4;
 
-class HelloWorld {
-    public static void main(String[] args) {
-        Employee emp = new Employee("Umut",2000.0,45.0,1985);
-        
-        System.out.println(emp.toString());
+    }
+
+    public void mayinMap() {
+        for (int i = 0; i < rowNumber; i++) {
+            for (int j = 0; j < colNumber; j++) {
+                mayinMap[i][j] = "-";
+                gameMap[i][j] = "-";
+
+            }
+        }
+    }
+
+    public void randomNumber() {
+        Random r = new Random();
+        for (int i = 0; i < this.mayinSayisi; i++) {
+            int rsayi = r.nextInt(this.rowNumber);
+            int rsayi2 = r.nextInt(this.colNumber);
+            if (!this.mayinMap[rsayi][rsayi2].equals("*")) {
+                this.mayinMap[rsayi][rsayi2] = "*";
+            }
+        }
+    }
+
+    public void printmayinMap() {
+        System.out.println("Mayinlarin Konumu");
+        randomNumber();
+        for (int i = 0; i < this.rowNumber; i++) {
+            for (int j = 0; j < this.colNumber; j++) {
+                if (!this.mayinMap[i][j].equals("*")) {
+                    this.mayinMap[i][j] = "-";
+                }
+                System.out.print(this.mayinMap[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("==================================");
+        System.out.println("Mayin Tarlasi Oyununa Hosgeliniz !");
+    }
+
+    public void printGameMap() {
+        for (int i = 0; i < this.rowNumber; i++) {
+            for (int j = 0; j < this.colNumber; j++) {
+                this.gameMap[i][j] = "-";
+                System.out.print(this.gameMap[i][j] + " ");
+            }
+            System.out.println();
+
+        }
+    }
+
+    public void indisSecme() {
+        Scanner inp = new Scanner(System.in);
+        isTrue = false;
+        while (!isTrue) {
+            System.out.print("Satir Giriniz : ");
+            a = inp.nextInt();
+            System.out.print("Sutun Giriniz : ");
+            b = inp.nextInt();
+            if (a > rowNumber || b > colNumber) {
+                System.out.println("Map sinirlari disinda secim yaptınız tekrar giriniz !");
+                continue;
+            }
+            if (mayinMap[a][b].equals("*")) {
+                System.out.println("Game Over!");
+                break;
+
+            }
+            control();
+            if (finish()) {
+
+                System.out.println("Tebrikler kazandiniz :)))))");
+                break;
+            }
+        }
+    }
+
+    public void control() {
+        count = 0;
+        for (int i = (a - 1); i <= (a + 1); i++) {
+            for (int j = (b - 1); j <= (b + 1); j++) {
+                if (i < 0 || j < 0 || i >= this.rowNumber || j >= this.colNumber) {
+                    continue;
+                }
+                if (this.mayinMap[i][j].equals("*")) {
+                    count++;
+                }
+            }
+        }
+
+        this.gameMap[a][b] = String.valueOf(count);
+        this.mayinMap[a][b] = String.valueOf(count);
+        for (int i = 0; i < this.rowNumber; i++) {
+            for (int j = 0; j < this.colNumber; j++) {
+                System.out.print(this.gameMap[i][j] + " ");
+            }
+            System.out.println("");
+        }
+    }
+
+    public boolean finish() {
+        for (int i = 0; i < this.rowNumber; i++) {
+            for (int j = 0; j < this.colNumber; j++) {
+                if (this.mayinMap[i][j].equals("-")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public void run() {
+        mayinMap();
+        printmayinMap();
+        indisSecme();
     }
 }
 
-class Employee{
-    String name;
-    Double salary;
-    Double workHours;
-    int hireYear;
 
-    public Employee(String _name, Double _salary, Double _workHours, int _hireYear){
-        this.name=_name;
-        this.salary=_salary;
-        this.workHours=_workHours;
-        this.hireYear=_hireYear;
+
+public class Main {
+     public static void main(String[] args) {
+        MineSwepper mineSwepper = new MineSwepper(4,4);
+        mineSwepper.run();
     }
-    
-    public Double tax(){
-        if(this.salary > 1000)
-            return this.salary*3/100;
-        return 0.0;
-    }
-    
-    public Double bonus(){
-        Double bonusWorksHours = this.workHours - 40.0;
-        if(bonusWorksHours > 0)
-            return bonusWorksHours*30;
-        return 0.0;
-    }
-    
-    public Double raiseSalary(){
-        int workYears = 2021 - this.hireYear;
-        Double realSalary = this.salary - this.tax() + this.bonus();
-        
-        if(workYears < 10 )
-            return realSalary*0.05;
-        else if (workYears > 9 && workYears < 20)
-            return realSalary*0.10;
-        else
-            return realSalary*0.15;
-            
-    }
-    
-    public String toString() { 
-        String msg = "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax());
-        this.salary = this.salary+this.raiseSalary();
-        msg += "'\nNext Year Total Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
-        
-        return msg;
-    } 
-    
 }
