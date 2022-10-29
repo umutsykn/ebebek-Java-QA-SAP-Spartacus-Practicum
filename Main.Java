@@ -1,61 +1,62 @@
-
-
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
-
-class HelloWorld {
+import java.util.Scanner;
+public class ATMProjesiPratik {
     public static void main(String[] args) {
-        Employee emp = new Employee("Umut",2000.0,45.0,1985);
-        
-        System.out.println(emp.toString());
-    }
-}
+        String userName, passWord;
+        int balance = 50000, right = 3, select, vSelect = 0;
+        do {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Kullanıcı adı giriniz: ");
+            userName = input.nextLine();
+            System.out.print("Şifre giriniz: ");
+            passWord = input.nextLine();
 
-class Employee{
-    String name;
-    Double salary;
-    Double workHours;
-    int hireYear;
-
-    public Employee(String _name, Double _salary, Double _workHours, int _hireYear){
-        this.name=_name;
-        this.salary=_salary;
-        this.workHours=_workHours;
-        this.hireYear=_hireYear;
+            if (userName.equals("ali") && passWord.equals("patika123")) {
+                System.out.println("Kodluyoruz Bankasına Hoşgeldiniz...");
+                do {
+                    System.out.println("""
+                            Yapmak istediğiniz işlem seçiniz :\s
+                            1-Para Yatırma
+                            2-Para Çekme
+                            3-Bakiye Sorgulama
+                            4-Çıkış Yap""");
+                    select = input.nextInt();
+                    switch (select) {
+                        case 1:
+                            System.out.println("Yatırmak istediğiniz tutar : ");
+                            int price = input.nextInt();
+                            balance += price;
+                            System.out.print("Bakiyeniz " + balance);
+                            break;
+                        case 2:
+                            System.out.print("Çekmek istediğiniz tutar : ");
+                            price = input.nextInt();
+                            if (price > balance) {
+                                System.out.println("Yetersiz bakiye !");
+                                break;
+                            } else {
+                                balance -= price;
+                                System.out.println("Bakiyeniz : " + balance);
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Mevcut Bakiyeniz : " + balance);
+                            break;
+                        case 4:
+                            System.out.println("İyi günler. Yine bekleriz ...");
+                            vSelect++;
+                            break;
+                        default:
+                            System.out.println("Hatalı tuşlama yaptınız. ");
+                    }
+                } while (select != 4);
+            } else {
+                right--;
+                System.out.println("Hatalı giriş yaptınız. Tekrar deneyiniz.");
+                System.out.println("Kalan hakkınız : " + right);
+                if (right == 0) {
+                    System.out.print("Kartınız bloke oldu.");
+                }
+            }
+        } while (right > 0 && vSelect != 1);
     }
-    
-    public Double tax(){
-        if(this.salary > 1000)
-            return this.salary*3/100;
-        return 0.0;
-    }
-    
-    public Double bonus(){
-        Double bonusWorksHours = this.workHours - 40.0;
-        if(bonusWorksHours > 0)
-            return bonusWorksHours*30;
-        return 0.0;
-    }
-    
-    public Double raiseSalary(){
-        int workYears = 2021 - this.hireYear;
-        Double realSalary = this.salary - this.tax() + this.bonus();
-        
-        if(workYears < 10 )
-            return realSalary*0.05;
-        else if (workYears > 9 && workYears < 20)
-            return realSalary*0.10;
-        else
-            return realSalary*0.15;
-            
-    }
-    
-    public String toString() { 
-        String msg = "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax());
-        this.salary = this.salary+this.raiseSalary();
-        msg += "'\nNext Year Total Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
-        
-        return msg;
-    } 
-    
 }
