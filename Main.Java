@@ -1,61 +1,107 @@
+import java.util.Scanner;
 
+public class GelismisHesapMakinesi {
 
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
+    static double toplama(int a, int b) {
+        double toplam = a + b;
+        System.out.print("Toplam : ");
+        return toplam;
+    }
 
-class HelloWorld {
+    static double çıkarma(int a, int b) {
+        double fark = a - b;
+        System.out.print("Fark : ");
+        return fark;
+    }
+
+    static double çarpma(int a, int b) {
+        double carpım = a * b;
+        System.out.print("Çarpım : ");
+        return carpım;
+    }
+
+    static double bölme(int a, int b) {
+        double bölme = a / b;
+        System.out.print("Bölüm : ");
+        return bölme;
+    }
+
+    static double üs(int a, int b) {
+        double üs = Math.pow(a, b);
+        return üs;
+    }
+
+    static void dikdörtgen(int a, int b) {
+        double cevre = (a + b) * 2;
+        double alan = (a * b);
+
+        System.out.println("Alan : " + alan + "\nÇevre : " + cevre);
+    }
+
+    static void modAlma(int a, int b) {
+        int sonuc = a % b;
+
+        System.out.println("kalan : " + sonuc);
+
+    }
+
     public static void main(String[] args) {
-        Employee emp = new Employee("Umut",2000.0,45.0,1985);
-        
-        System.out.println(emp.toString());
-    }
-}
+        Scanner scanner = new Scanner(System.in);
+        int secim;
+        String menu = "1-Toplama\n"
+                + "2-Çıkarma\n"
+                + "3-Çarpma\n"
+                + "4-Bölme\n"
+                + "5-Üslü sayı hesaplama\n"
+                + "6-Dikdörtgen Alan ve Çevre Hesabı\n"
+                + "7-Mod Alma\n"
+                + "0-Çıkış Yap";
 
-class Employee{
-    String name;
-    Double salary;
-    Double workHours;
-    int hireYear;
+        do {
 
-    public Employee(String _name, Double _salary, Double _workHours, int _hireYear){
-        this.name=_name;
-        this.salary=_salary;
-        this.workHours=_workHours;
-        this.hireYear=_hireYear;
+            System.out.println("***************************");
+            System.out.println(menu);
+            System.out.println("***************************");
+            System.out.print("Lütfen işleminizi seçin :");
+            secim = scanner.nextInt();
+
+            if (secim == 0) {
+                System.out.println("Çıkış yapılıyor.");
+                return;
+            }
+            System.out.print("1.sayıyı girin : ");
+            int a = scanner.nextInt();
+            System.out.print("2.sayıyı girin : ");
+            int b = scanner.nextInt();
+
+            switch (secim) {
+                case 1:
+                    System.out.println(toplama(a, b));
+                    break;
+                case 2:
+                    System.out.println(çıkarma(a, b));
+                    break;
+                case 3:
+                    System.out.println(çarpma(a, b));
+                    break;
+                case 4:
+                    System.out.println(bölme(a, b));
+                    break;
+                case 5:
+                    System.out.println(üs(a, b));
+                    break;
+                case 6:
+                    dikdörtgen(a, b);
+                    break;
+
+                case 7:
+                    modAlma(a, b);
+                    break;
+                default:
+                    System.out.println("Yanlış bir değer girdiniz, tekrar deneyiniz.");
+            }
+        } while (secim != 0);
+
     }
-    
-    public Double tax(){
-        if(this.salary > 1000)
-            return this.salary*3/100;
-        return 0.0;
-    }
-    
-    public Double bonus(){
-        Double bonusWorksHours = this.workHours - 40.0;
-        if(bonusWorksHours > 0)
-            return bonusWorksHours*30;
-        return 0.0;
-    }
-    
-    public Double raiseSalary(){
-        int workYears = 2021 - this.hireYear;
-        Double realSalary = this.salary - this.tax() + this.bonus();
-        
-        if(workYears < 10 )
-            return realSalary*0.05;
-        else if (workYears > 9 && workYears < 20)
-            return realSalary*0.10;
-        else
-            return realSalary*0.15;
-            
-    }
-    
-    public String toString() { 
-        String msg = "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax());
-        this.salary = this.salary+this.raiseSalary();
-        msg += "'\nNext Year Total Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
-        
-        return msg;
-    } 
-    
+
 }
