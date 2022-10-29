@@ -3,31 +3,15 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		String userName, password, reset, newPassword;
+		int heat;
+		Scanner input =new Scanner(System.in);
+		System.out.println( " Sicaklik Derecesi Giriniz");
+		heat=input.nextInt();
 
-		Scanner inp = new Scanner(System.in);
-		System.out.print("Kullanıcı adını giriniz :");
-		userName = inp.nextLine();
+		if (heat <= 5) { System.out.println( "Kayak yababilirsin"); }
+		else if ( heat>5 && heat<=15) {System.out.println(" Sinamaya gidebilirsin"); }
+		else if ( heat>=15 && heat<=25) { System.out.println( " Piknik gide bilirsin");}
+		else if ( heat>=25) { System.out.println( " Yuzmeye gide bilirsin");}
 
-		System.out.print("Şifrenizi giriniz : ");
-		password = inp.nextLine();
-
-		if (userName.equals("patika") && password.equals("java123")) {
-			System.out.print("Giriş yaptınız");
-		} else {
-			System.out.print("Bilgileriniz yanlış, şifre yenilemek istermisiniz:  " + " \n( yes / no )");
-			reset = inp.nextLine();
-			if (reset.equals("no")) {
-				System.out.print("Giriş başarısız");
-			} else if (reset.equals("yes")) {
-				System.out.print("Yeni şifrenizi giriniz :");
-				newPassword = inp.nextLine();
-				if (newPassword.equals("java123")) {
-					System.out.print("Şifreniz eski şifre ile aynıdır,lütfen başka bir parola seçiniz");
-				} else {
-					System.out.println("Şifreniz oluşturuldu");
-				}
-			}
-		}
 	}
 }
