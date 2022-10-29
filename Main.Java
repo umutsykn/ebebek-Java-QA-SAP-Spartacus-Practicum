@@ -1,4 +1,3 @@
-package Metotlar_Pratikleri;
 
 import java.util.Scanner;
 
