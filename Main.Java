@@ -2,19 +2,35 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args ){
         Scanner input = new Scanner(System.in);
-        int fizikNot,matNot,kimyaNot,turkceNot,tarihNot,muzikNot;
-        System.out.println("Fizik notunuzu giriniz: ");
-        fizikNot= input.nextInt();
-        System.out.println("Matematik notunuzu giriniz: ");
-        matNot= input.nextInt();
-        System.out.println("Kimya notunuzu giriniz: ");
-        kimyaNot= input.nextInt();
-        System.out.println("Türkçe notunuzu giriniz: ");
-        turkceNot= input.nextInt();
-        System.out.println("Tarih notunuzu giriniz: ");
-        tarihNot= input.nextInt();
-        System.out.println("Müzik notunuzu giriniz: ");
-        muzikNot= input.nextInt();
-        System.out.println("Ortalama: "+(fizikNot+matNot+muzikNot+tarihNot+turkceNot+kimyaNot)/6);
+		int value1, value2, select;
+		System.out.print("Enter the first number");
+		value1 = input.nextInt();
+		System.out.print("Enter the second number");
+		value2 = input.nextInt();
+		System.out.println("Select operation :");
+		System.out.println("1)+ \n2)- \n3)* \n4)/");
+		System.out.print("---->");
+		select = input.nextInt();
+		switch (select) {
+		case 1: // +
+			System.out.print(value1 + value2);
+			break;
+		case 2: // -
+			System.out.println(value1 - value2);
+			break;
+		case 3: // *
+			System.out.println(value1 * value2);
+			break;
+		case 4: // /
+			if (value2 == 0) {
+				System.out.println("A number cannot be divided by 0!");
+				System.out.println("Choose a number other than 0.");
+			} else
+				System.out.println(value1 / value2);
+			break;
+		default:  
+			System.out.println("invalid input");
+		
+		}
     }
 }
