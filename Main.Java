@@ -1,61 +1,113 @@
+import java.util.Scanner;
 
-
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
-
-class HelloWorld {
+public class Main {
     public static void main(String[] args) {
-        Employee emp = new Employee("Umut",2000.0,45.0,1985);
-        
-        System.out.println(emp.toString());
-    }
-}
+        int month, day;
 
-class Employee{
-    String name;
-    Double salary;
-    Double workHours;
-    int hireYear;
+        Scanner input = new Scanner(System.in);
 
-    public Employee(String _name, Double _salary, Double _workHours, int _hireYear){
-        this.name=_name;
-        this.salary=_salary;
-        this.workHours=_workHours;
-        this.hireYear=_hireYear;
+        System.out.println("1: January      2: February     3: March     4: April     5: May     6: June\n7: July     8: August     9: September     10: October     11: November     12: December");
+
+        System.out.print("Please enter the month you were born:");
+        month = input.nextInt();
+
+        System.out.print("Please enter the day you were born:");
+        day = input.nextInt();
+
+        if ((month == 1) && (day <= 31)) {
+            if (day > 22) {
+                System.out.println("Aquarius");
+            } else {
+                System.out.println("Capricorn");
+            }
+        }
+
+        if ((month == 2) && (day <= 29)) {
+            if (day > 20) {
+                System.out.println("Pisces");
+            } else {
+                System.out.println("Aquarius");
+            }
+        }
+
+        if ((month == 3) && (day <= 31)) {
+            if (day > 20) {
+                System.out.println("Aries");
+            } else {
+                System.out.println("Pisces");
+            }
+        }
+
+        if ((month == 4) && (day <= 30)) {
+            if (day > 20) {
+                System.out.println("Taurus");
+            } else {
+                System.out.println("Aries");
+            }
+        }
+
+        if ((month == 5) && (day <= 31)) {
+            if (day > 21) {
+                System.out.println("Gemini");
+            } else {
+                System.out.println("Taurus");
+            }
+        }
+
+        if ((month == 6) && (day <= 30)) {
+            if (day > 22) {
+                System.out.println("Cancer");
+            } else {
+                System.out.println("Gemini");
+            }
+        }
+
+        if ((month == 7) && (day <= 31)) {
+            if (day > 22) {
+                System.out.println("Leo");
+            } else {
+                System.out.println("Cancer");
+            }
+        }
+
+        if ((month == 8) && (day <= 31)) {
+            if (day > 22) {
+                System.out.println("Virgo");
+            } else {
+                System.out.println("Leo");
+            }
+        }
+
+        if ((month == 9) && (day <= 30)) {
+            if (day > 22) {
+                System.out.println("Libra");
+            } else {
+                System.out.println("Virgo");
+            }
+        }
+
+        if ((month == 10) && (day <= 31)) {
+            if (day > 22) {
+                System.out.println("Scorpio");
+            } else {
+                System.out.println("Libra");
+            }
+        }
+
+        if ((month == 11) && (day <= 30)) {
+            if (day > 21) {
+                System.out.println("Sagittarius");
+            } else {
+                System.out.println("Scorpio");
+            }
+        }
+
+        if ((month == 12) && (day <= 31)) {
+            if (day > 21) {
+                System.out.println("Capricorn");
+            } else {
+                System.out.println("Sagittarius");
+            }
+        }
     }
-    
-    public Double tax(){
-        if(this.salary > 1000)
-            return this.salary*3/100;
-        return 0.0;
-    }
-    
-    public Double bonus(){
-        Double bonusWorksHours = this.workHours - 40.0;
-        if(bonusWorksHours > 0)
-            return bonusWorksHours*30;
-        return 0.0;
-    }
-    
-    public Double raiseSalary(){
-        int workYears = 2021 - this.hireYear;
-        Double realSalary = this.salary - this.tax() + this.bonus();
-        
-        if(workYears < 10 )
-            return realSalary*0.05;
-        else if (workYears > 9 && workYears < 20)
-            return realSalary*0.10;
-        else
-            return realSalary*0.15;
-            
-    }
-    
-    public String toString() { 
-        String msg = "Name: '" + this.name + "'\nSalary: '" + this.salary + "'\nWork Hours: '" + this.workHours + "\nHire Year: '" + this.hireYear + "\nTax: '"+this.tax()+"\nBonus: '"+this.bonus()+"'\nRaise Salary: '"+this.raiseSalary() + "'\nTax And Bonus Salary: '"+(this.salary+this.bonus()-this.tax());
-        this.salary = this.salary+this.raiseSalary();
-        msg += "'\nNext Year Total Salary: '"+(this.salary+this.bonus()-this.tax())+"'";
-        
-        return msg;
-    } 
-    
 }
